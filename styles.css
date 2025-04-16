@@ -1,0 +1,323 @@
+:root {
+    --background-color: #ffa726;
+    --color2: #fec050;
+    --text-color: #eae1e1;
+    --accent-color: #d71258;
+    --white: #ffffff;
+  }
+
+body {
+  background: var(--background-color);
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Fredoka One', sans-serif;
+  color: white;
+  height: 100vh;
+  cursor: none;
+}
+
+header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 56px;
+  z-index: 10;
+  color: var(--background-color);
+}
+
+#header-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo {
+  position: relative;
+  width: 112px;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  top: 15%;
+  right: 10%;
+  width: 20px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  transform: rotate(-35deg);
+}
+
+nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  margin-left: 30px;
+  font-weight: 500;
+  font-size: 1.2em;
+  transition: color 0.3s;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+}
+
+nav a:hover {
+  color: white;
+}
+
+.gooey-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  filter: url(#goo);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.circle,
+.header-blob {
+  position: absolute;
+  background: var(--accent-color);
+  border-radius: 50%;
+}
+
+.circle {
+  width: 120px;
+  height: 120px;
+  background: var(--accent-color);
+  transition: transform 0.1s ease-out;
+  filter: url(#goo);
+  position: absolute;
+  border-radius: 50%;
+}
+
+.fixed {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header-container {
+  position: relative;
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.header-blob {
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 95%;
+  height: 80px;
+  border-radius: 0 0 30px 30px;
+  margin: 20px auto 0;
+  background: var(--accent-color);
+  position: relative;
+  overflow: hidden;
+  filter: url(#goo);
+  transform: translateZ(0);
+  -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+}
+
+/* GUI Container */
+.gui-container {
+  position: relative;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  z-index: 10;
+}
+
+.gui-section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+.gui-section h2 {
+  color: var(--text-color);
+  margin-bottom: 30px;
+  font-family: 'Fredoka One', sans-serif;
+}
+
+.gui-group {
+  margin-bottom: 25px;
+}
+
+/* Buttons */
+.gooey-button {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 1em;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+  position: relative;
+  overflow: hidden;
+  margin-right: 10px;
+  filter: url(#goo);
+}
+
+.gooey-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -25%;
+  width: 150%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(45deg) translateY(100%);
+  transition: transform 0.3s;
+}
+
+.gooey-button:hover::after {
+  transform: rotate(45deg) translateY(-100%);
+}
+
+.gooey-button:hover {
+  transform: scale(1.05);
+}
+
+.gooey-button.secondary {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Checkbox */
+.gooey-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-color);
+  font-family: 'Fredoka One', sans-serif;
+}
+
+.gooey-checkbox input {
+  display: none;
+}
+
+.checkmark {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  margin-right: 10px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.gooey-checkbox input:checked + .checkmark {
+  background: var(--accent-color);
+}
+
+.checkmark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 3px;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s;
+}
+
+.gooey-checkbox input:checked + .checkmark::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Radio Buttons */
+.gooey-radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-color);
+  font-family: 'Fredoka One', sans-serif;
+  margin-bottom: 10px;
+}
+
+.gooey-radio input {
+  display: none;
+}
+
+.radio-mark {
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.gooey-radio input:checked + .radio-mark {
+  background: var(--accent-color);
+}
+
+.radio-mark::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s;
+}
+
+.gooey-radio input:checked + .radio-mark::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Text Input */
+.gooey-input {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-color);
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 1em;
+  transition: background 0.3s;
+}
+
+.gooey-input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.gooey-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Select */
+.gooey-select {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-color);
+  font-family: 'Fredoka One', sans-serif;
+  font-size: 1em;
+  cursor: pointer;
+  appearance: none;
+  transition: background 0.3s;
+}
+
+.gooey-select:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.3);
+}

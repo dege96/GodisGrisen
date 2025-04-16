@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Gooey Layer -->
+  <div class="gooey-container">
+    <div class="header-blob"></div>
+    <div class="circle" id="follower"></div>´
+  </div>
+
+  <!-- Real Header -->
+  <div class="header-container">
+    <header>
+      <img class="logo" src="Godisgrisen.png" alt="Logo">
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+      </nav>
+    </header>
+  </div>
+
+  <!-- GUI Components -->
+  <main class="gui-container">
+    <div class="gui-section">
+      <h2>Gooey Components</h2>
+      
+      <!-- Buttons -->
+      <div class="gui-group">
+        <button class="gooey-button primary">Primary Button</button>
+        <button class="gooey-button secondary">Secondary Button</button>
+      </div>
+
+      <!-- Checkbox -->
+      <div class="gui-group">
+        <label class="gooey-checkbox">
+          <input type="checkbox">
+          <span class="checkmark"></span>
+          Check me out
+        </label>
+      </div>
+
+      <!-- Radio Buttons -->
+      <div class="gui-group">
+        <label class="gooey-radio">
+          <input type="radio" name="radio-group">
+          <span class="radio-mark"></span>
+          Option 1
+        </label>
+        <label class="gooey-radio">
+          <input type="radio" name="radio-group">
+          <span class="radio-mark"></span>
+          Option 2
+        </label>
+      </div>
+
+      <!-- Text Input -->
+      <div class="gui-group">
+        <input type="text" class="gooey-input" placeholder="Type something...">
+      </div>
+
+      <!-- List -->
+      <div class="gui-group">
+        <select class="gooey-select">
+          <option>Select an option</option>
+          <option>Option 1</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+        </select>
+      </div>
+    </div>
+  </main>
+
+  <!-- Gooey SVG Filter -->
+  <svg>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+      <feColorMatrix in="blur" mode="matrix"
+        values="1 0 0 0 0  
+                0 1 0 0 0  
+                0 0 1 0 0  
+                0 0 0 20 -10" result="goo" />
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+  </svg>
+
+  <!-- JS for Cursor & Soft Squish -->
+  <script>
+    const follower = document.getElementById('follower');
+    const size = 120;
+
+    let lastX = window.innerWidth / 2;
+    let lastY = window.innerHeight / 2;
+    let targetX = lastX;
+    let targetY = lastY;
+    let lastTime = performance.now();
+
+    document.addEventListener('mousemove', (e) => {
+      targetX = e.clientX - size / 2;
+      targetY = e.clientY - size / 2;
+    });
+
+    function animate() {
+      const now = performance.now();
+      const dt = now - lastTime;
+
+      const dx = targetX - lastX;
+      const dy = targetY - lastY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const speed = distance / (dt || 1);
+
+      const directionX = dx / (distance || 1);
+      const directionY = dy / (distance || 1);
+
+      lastX += (targetX - lastX) * 0.15;
+      lastY += (targetY - lastY) * 0.15;
+
+      follower.style.left = `${lastX}px`;
+      follower.style.top = `${lastY}px`;
+
+      lastTime = now;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  </script>
+
+</body>
+</html>
